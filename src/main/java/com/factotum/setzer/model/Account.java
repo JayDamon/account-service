@@ -1,104 +1,65 @@
 package com.factotum.setzer.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "account")
-public class Account extends DateAuditable implements Serializable {
+@Data
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table("account")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Account implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1;
 
     @Id
-    @Column(name = "account_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column("id")
+    @JsonProperty("id")
     private Long id;
 
-    @Column(name = "name")
+    @Column("name")
+    @JsonProperty("name")
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "account_type_id", nullable = false)
+    @Column("account_type_id")
+    @JsonIgnore
+    private Integer accountTypeId;
+
+    @Transient
+    @JsonProperty("type")
     private AccountType accountType;
 
-    @Column(name = "starting_balance", nullable = false)
+    @Column("starting_balance")
+    @JsonProperty("startingBalance")
     private BigDecimal startingBalance;
 
-    @Column(name = "current_balance")
+    @Column("current_balance")
+    @JsonProperty("currentBalance")
     private BigDecimal currentBalance;
 
-    @Column(name = "is_primary_account")
+    @Column("is_primary_account")
+    @JsonProperty("isPrimary")
     private Boolean isPrimaryAccount;
 
-    @Column(name = "is_in_cash_flow")
+    @Column("is_in_cash_flow")
+    @JsonProperty("isInCashFlow")
     private Boolean isInCashFlow;
 
-    public Account() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public AccountType getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
-    }
-
-    public BigDecimal getStartingBalance() {
-        return startingBalance;
-    }
-
-    public void setStartingBalance(BigDecimal startingBalance) {
-        this.startingBalance = startingBalance;
-    }
-
-    public BigDecimal getCurrentBalance() {
-        return currentBalance;
-    }
-
-    public void setCurrentBalance(BigDecimal currentBalance) {
-        this.currentBalance = currentBalance;
-    }
-
-    public Boolean getPrimaryAccount() {
-        return isPrimaryAccount;
-    }
-
-    public void setPrimaryAccount(Boolean primaryAccount) {
-        isPrimaryAccount = primaryAccount;
-    }
-
-    public Boolean getInCashFlow() {
-        return isInCashFlow;
-    }
-
-    public void setInCashFlow(Boolean inCashFlow) {
-        isInCashFlow = inCashFlow;
-    }
 }

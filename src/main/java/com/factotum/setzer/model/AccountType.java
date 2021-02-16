@@ -1,56 +1,42 @@
 package com.factotum.setzer.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
 import java.io.Serial;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "account_type")
-public class AccountType extends DateAuditable implements Serializable {
+@Data
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table("account_type")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class AccountType implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1;
 
     @Id
-    @Column(name = "account_type_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column("id")
+    @JsonProperty("id")
     private Integer id;
 
-    @Column(name = "full_account_type")
+    @Column("full_account_type")
+    @JsonProperty("fullName")
     private String fullName;
 
-    @Column(name = "short_account_type")
+    @Column("short_account_type")
+    @JsonProperty("shortName")
     private String shortName;
 
-    public AccountType() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullType) {
-        this.fullName = fullType;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortType) {
-        this.shortName = shortType;
-    }
 }
