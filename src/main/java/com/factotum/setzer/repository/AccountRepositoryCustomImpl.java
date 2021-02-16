@@ -1,10 +1,9 @@
 package com.factotum.setzer.repository;
 
+import com.factotum.setzer.dto.AccountDto;
 import com.factotum.setzer.mapper.AccountMapper;
-import com.factotum.setzer.model.Account;
 import org.springframework.r2dbc.core.DatabaseClient;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 public class AccountRepositoryCustomImpl implements AccountRepositoryCustom {
 
@@ -21,15 +20,7 @@ public class AccountRepositoryCustomImpl implements AccountRepositoryCustom {
             "LEFT JOIN account_type at ON at.id = a.account_type_id";
 
     @Override
-    public Mono<Account> findById(long id) {
-
-        String query = String.format("%s WHERE a.id = :id", SELECT_QUERY);
-
-        return this.databaseClient.sql(query).bind("id", id).map(new AccountMapper()::apply).one();
-    }
-
-    @Override
-    public Flux<Account> findAll() {
+    public Flux<AccountDto> queryAll() {
 
         return this.databaseClient.sql(SELECT_QUERY).map(new AccountMapper()::apply).all();
     }

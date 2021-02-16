@@ -1,8 +1,10 @@
 package com.factotum.setzer.controller;
 
+import com.factotum.setzer.dto.AccountDto;
 import com.factotum.setzer.model.Account;
 import com.factotum.setzer.repository.AccountRepository;
 import com.factotum.setzer.service.AccountService;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,23 +28,24 @@ public class AccountController {
     }
 
     @GetMapping("")
-    Flux<Account> getAccountRepository() {
-        return this.accountRepository.findAll();
+    Flux<AccountDto> getAccountRepository() {
+        return this.accountRepository.queryAll();
     }
 
     @PostMapping("")
-    Mono<Account> create(@RequestBody Account account) {
-        return this.accountRepository.save(account);
+    Mono<AccountDto> create(@RequestBody AccountDto newAccount) {
+        Account account = new ModelMapper().map(newAccount, Account.class);
+        return this.accountRepository.save(account).map(a -> new ModelMapper().map(a, AccountDto.class));
     }
 
     @PatchMapping("/{id}")
-    Mono<Account> updateAccount(@PathVariable long id, @RequestBody Account account) {
+    Mono<AccountDto> updateAccount(@PathVariable long id, @RequestBody AccountDto account) {
 
         if (id != account.getId()) {
             throw new IllegalArgumentException("Path id and body id must match");
         }
 
-        return accountService.save(account);
+        return accountService.update(account).map(a -> new ModelMapper().map(a, AccountDto.class));
     }
 
 }

@@ -1,11 +1,9 @@
 package com.factotum.setzer.service;
 
+import com.factotum.setzer.dto.AccountDto;
 import com.factotum.setzer.model.Account;
-import com.factotum.setzer.model.AccountType;
 import com.factotum.setzer.repository.AccountRepository;
-import com.factotum.setzer.repository.AccountTypeRepository;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -22,17 +20,17 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Mono<Account> save(Account updatedAccount) {
-        return this.accountRepository.findById(updatedAccount.getId().longValue())
+    public Mono<Account> update(AccountDto updatedAccount) {
+        return this.accountRepository.findById(updatedAccount.getId())
                 .map(account -> {
                     ModelMapper mapper = new ModelMapper();
-                    mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT).setPropertyCondition(isNotNull());
-                    mapper.typeMap(Account.class, Account.class)
-                            .addMappings(map -> {
-                                map.map(a -> a.getAccountType().getId(), Account::setAccountTypeId);
-                                map.skip(Account::setAccountTypeId);
-                            }).map(updatedAccount, account);
-                    return account;
+                    mapper.getConfiguration().setPropertyCondition(isNotNull());
+//                    mapper.typeMap(Account.class, Account.class)
+//                            .addMappings(map -> {
+//                                map.map(a -> a.getAccountType().getId(), Account::setAccountTypeId);
+//                                map.skip(Account::setAccountTypeId);
+//                            }).map(updatedAccount, account);
+                    return new ModelMapper().map(updatedAccount, Account.class);
                 }).flatMap(this.accountRepository::save);
     }
 }
