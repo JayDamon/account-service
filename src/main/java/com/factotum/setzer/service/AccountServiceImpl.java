@@ -23,13 +23,9 @@ public class AccountServiceImpl implements AccountService {
     public Mono<Account> update(AccountDto updatedAccount) {
         return this.accountRepository.findById(updatedAccount.getId())
                 .map(account -> {
+//                    System.out.println(account);
                     ModelMapper mapper = new ModelMapper();
                     mapper.getConfiguration().setPropertyCondition(isNotNull());
-//                    mapper.typeMap(Account.class, Account.class)
-//                            .addMappings(map -> {
-//                                map.map(a -> a.getAccountType().getId(), Account::setAccountTypeId);
-//                                map.skip(Account::setAccountTypeId);
-//                            }).map(updatedAccount, account);
                     return new ModelMapper().map(updatedAccount, Account.class);
                 }).flatMap(this.accountRepository::save);
     }

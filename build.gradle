@@ -39,6 +39,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation group: 'com.jayway.jsonpath', name: 'json-path-assert', version: '2.5.0'
+
 }
 
 dependencyManagement {

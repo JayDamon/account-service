@@ -41,6 +41,10 @@ public class AccountController {
     @PatchMapping("/{id}")
     Mono<AccountDto> updateAccount(@PathVariable long id, @RequestBody AccountDto account) {
 
+        if (account.getId() == null) {
+            throw new IllegalArgumentException("Valid account id must be provided");
+        }
+
         if (id != account.getId()) {
             throw new IllegalArgumentException("Path id and body id must match");
         }
