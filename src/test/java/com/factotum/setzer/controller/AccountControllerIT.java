@@ -75,6 +75,25 @@ class AccountControllerIT {
     }
 
     @Test
+    void getAccountById_GivenAccountExists_ThenReturnAccount() {
+
+        webTestClient.get()
+                .uri(URI + "/{id}", 1L)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.id").value(is(greaterThan(0)))
+                .jsonPath("$.name").isEqualTo("My Checking")
+                .jsonPath("$.startingBalance").isEqualTo(500.01)
+                .jsonPath("$.currentBalance").isEqualTo(8000.56)
+                .jsonPath("$.isPrimary").isEqualTo(true)
+                .jsonPath("$.isInCashFlow").isEqualTo(true)
+                .jsonPath("$.type").exists()
+                .jsonPath("$.type.id").isEqualTo(1);
+
+    }
+
+    @Test
     void createNewAccount_GivenValidAccountProvided_ThenReturnCreatedAccount() throws IOException {
 
         this.accountDto.setId(null);

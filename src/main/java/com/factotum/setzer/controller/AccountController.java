@@ -28,8 +28,13 @@ public class AccountController {
     }
 
     @GetMapping("")
-    Flux<AccountDto> getAccountRepository() {
+    Flux<AccountDto> getAccounts() {
         return this.accountRepository.queryAll();
+    }
+
+    @GetMapping("/{id}")
+    Mono<AccountDto> getAccountById(@PathVariable(name = "id") long id) {
+        return this.accountRepository.findById(id).map(a -> new ModelMapper().map(a, AccountDto.class));
     }
 
     @PostMapping("")
