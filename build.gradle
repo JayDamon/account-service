@@ -1,19 +1,8 @@
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.4.2"
-		classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:3.0.1"
-	}
-}
-
 plugins {
 	id 'org.springframework.boot' version '2.4.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'org.springframework.cloud.contract' version '3.0.1'
 	id 'java'
-	id "groovy"
 	id 'maven'
 	id 'maven-publish'
 }
@@ -31,13 +20,6 @@ configurations {
 repositories {
 	mavenCentral()
 	mavenLocal()
-	maven {
-		url repsyUrl
-		credentials {
-			username repsyUsername
-			password repsyPassword
-		}
-	}
 }
 
 ext {
@@ -63,12 +45,6 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation group: 'com.jayway.jsonpath', name: 'json-path-assert', version: '2.5.0'
 	testCompile 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
-//	testCompile 'org.codehaus.groovy:groovy-all:2.4.6'
-//	testCompile 'org.springframework.cloud:spring-cloud-contract-spec'
-//	testCompile 'org.springframework.boot:spring-boot-starter-test'
-
-//	compile "com.factotum.setzer:1.0"
-
 }
 
 dependencyManagement {
@@ -81,9 +57,6 @@ dependencyManagement {
 contracts {
 	testFramework = "JUNIT5"
 	packageWithBaseClasses = 'com.factotum.setzer.contract'
-//	baseClassMappings {
-//		baseClassMapping('com.factotum.setzer.contract.ContractVerifierBase')
-//	}
 }
 
 jar {
@@ -91,36 +64,7 @@ jar {
 	archiveVersion = '0.0.1'
 }
 
-bootJar {
-	archivesBaseName = 'setzer'
-	archiveVersion = '0.0.1'
-}
 
 test {
 	useJUnitPlatform()
-}
-
-publishing {
-	publications {
-		maven(MavenPublication) {
-			groupId = 'com.factotum'
-			artifactId = 'setzer'
-			version = '0.0.1'
-
-			from components.java
-		}
-//		bootJava(MavenPublication) {
-//			artifact bootJar
-//		}
-	}
-
-	repositories {
-		maven {
-			url repsyUrl
-			credentials {
-				username repsyUsername
-				password repsyPassword
-			}
-		}
-	}
 }
