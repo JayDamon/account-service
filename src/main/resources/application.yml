@@ -3,21 +3,6 @@ spring:
     name: setzer
 server:
   port: 8083
-logging:
-  level:
-    org:
-      springframework:
-        r2dbc: DEBUG
----
-
-spring:
-  config:
-    activate:
-      on-profile: mysql
-  r2dbc:
-    url: r2dbc:mysql://localhost:3309/mm
-    username: user
-    password: password
 
 ---
 
@@ -30,3 +15,23 @@ spring:
       enabled: false
   r2dbc:
     url: r2dbc:h2:mem:///test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: h2
+  r2dbc:
+    url: r2dbc:h2:mem:///test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+debug: true
+---
+
+spring:
+  config:
+    activate:
+      on-profile: mysql
+  r2dbc:
+    url: r2dbc:mysql://localhost:3309/mm
+    username: user
+    password: password
