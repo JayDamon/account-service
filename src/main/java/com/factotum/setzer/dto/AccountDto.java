@@ -1,10 +1,8 @@
 package com.factotum.setzer.dto;
 
-import com.factotum.setzer.model.AccountType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 

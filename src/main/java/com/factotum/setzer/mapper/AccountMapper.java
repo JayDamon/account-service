@@ -2,8 +2,6 @@ package com.factotum.setzer.mapper;
 
 import com.factotum.setzer.dto.AccountDto;
 import com.factotum.setzer.dto.AccountTypeDto;
-import com.factotum.setzer.model.Account;
-import com.factotum.setzer.model.AccountType;
 import io.r2dbc.spi.Row;
 
 import java.math.BigDecimal;
