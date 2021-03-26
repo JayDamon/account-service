@@ -43,7 +43,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation group: 'com.jayway.jsonpath', name: 'json-path-assert', version: '2.5.0'
-	testCompile 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
 }
 
 dependencyManagement {
@@ -51,16 +50,6 @@ dependencyManagement {
 		mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
-}
-
-contracts {
-	testFramework = "JUNIT5"
-	packageWithBaseClasses = 'com.factotum.setzer.contract'
-}
-
-jar {
-	archivesBaseName = 'setzer'
-	archiveVersion = '0.0.1'
 }
 
 test {
