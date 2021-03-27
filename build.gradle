@@ -1,10 +1,8 @@
 plugins {
 	id 'org.springframework.boot' version '2.4.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'org.springframework.cloud.contract' version '3.0.1'
 	id 'java'
 	id 'maven'
-	id 'maven-publish'
 }
 
 group = 'com.factotum'
