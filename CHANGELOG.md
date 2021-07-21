@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.0.1](https://github.com/JayDamon/setzer-account-service/compare/v1.0.0...v1.0.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* **gradle:** take ownership of gradlew and remove commented code ([5e1ade2](https://github.com/JayDamon/setzer-account-service/commit/5e1ade20604e729373ef9c44d509e1705440966c))
+
 # 1.0.0 (2021-07-21)
 
 
