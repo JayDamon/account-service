@@ -19,7 +19,9 @@ jobs:
             - v1-gradle-debs
       - run:
           name: Test
-          command: ./gradlew clean test
+          command: |
+            chmod +x ./gradlew
+            ./gradlew clean test
       - run:
           name: Package
           command: ./gradlew build -x test
