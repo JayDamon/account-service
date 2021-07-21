@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    discovery:
+      enabled: true
+  r2dbc:
+    url: r2dbc:h2:mem:///test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+debug: true
+server:
+  port: 8083

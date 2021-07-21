@@ -1,38 +1,25 @@
 spring:
   application:
-    name: setzer
-server:
-  port: 8083
+    name: setzer-account-service
+
+---
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
 
 ---
 
 spring:
-  config:
-    activate:
-      on-profile: test
   cloud:
+    kubernetes:
+      enabled: false
+      discovery:
+        enabled: false
     discovery:
       enabled: false
-  r2dbc:
-    url: r2dbc:h2:mem:///test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: h2
-  r2dbc:
-    url: r2dbc:h2:mem:///test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-debug: true
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: mysql
-  r2dbc:
-    url: r2dbc:mysql://localhost:3309/mm
-    username: user
-    password: password
