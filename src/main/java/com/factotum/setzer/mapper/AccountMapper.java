@@ -16,7 +16,7 @@ public class AccountMapper implements BiFunction<Row, Object, AccountDto> {
         accountType.setShortName(row.get("short_account_type", String.class));
 
         AccountDto account = new AccountDto();
-        account.setId(row.get("id", Long.class));
+        account.setId(row.get("account_id", Long.class));
         account.setName(row.get("name", String.class));
         account.setAccountType(accountType);
         account.setStartingBalance(row.get("starting_balance", BigDecimal.class));

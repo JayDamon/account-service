@@ -25,7 +25,7 @@ public class Account implements Serializable {
     private static final long serialVersionUID = 1;
 
     @Id
-    @Column("id")
+    @Column("account_id")
     private Long id;
 
     @Column("name")

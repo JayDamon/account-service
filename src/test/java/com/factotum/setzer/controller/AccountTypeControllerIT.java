@@ -41,6 +41,8 @@ public class AccountTypeControllerIT {
 
             String json = n.toString();
 
+            System.out.println(json);
+
             assertThat(json, hasJsonPath("$.fullName"));
             assertThat(json, hasJsonPath("$.shortName"));
 

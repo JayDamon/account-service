@@ -15,13 +15,14 @@ import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator;
 public class JpaConfiguration {
 
     @Bean
-    @Profile({"test", "h2"})
+    @Profile({"test"})
     public ConnectionFactoryInitializer initializer(@Qualifier("connectionFactory") ConnectionFactory connectionFactory) {
         ConnectionFactoryInitializer initializer = new ConnectionFactoryInitializer();
         initializer.setConnectionFactory(connectionFactory);
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator(
-                new ClassPathResource("schema.sql"),
-                new ClassPathResource("data.sql")
+                new ClassPathResource("test_data/drop_tables.sql"),
+                new ClassPathResource("db/migration/V1_0__create_mm_account_schema.sql"),
+                new ClassPathResource("test_data/V1_1__test_accounts.sql")
         );
         initializer.setDatabasePopulator(populator);
         return initializer;

@@ -13,11 +13,11 @@ public class AccountRepositoryCustomImpl implements AccountRepositoryCustom {
         this.databaseClient = databaseClient;
     }
 
-    private static final String SELECT_QUERY = "SELECT a.id, a.name, at.id as account_type_id, " +
+    private static final String SELECT_QUERY = "SELECT a.account_id, a.name, at.account_type_id as account_type_id, " +
             "at.full_account_type, at.short_account_type, " +
             "a.starting_balance, a.current_balance, a.is_primary_account, a.is_in_cash_flow " +
             "FROM account a " +
-            "LEFT JOIN account_type at ON at.id = a.account_type_id";
+            "LEFT JOIN account_type at ON at.account_type_id = a.account_type_id";
 
     @Override
     public Flux<AccountDto> queryAll() {
