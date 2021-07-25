@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.hasSize;
 @AutoConfigureWebTestClient
 public class AccountTypeControllerIT {
 
-    private static final String URI = "/v1/account-types";
+    private static final String URI = "/v1/accounts/types";
 
     @Autowired
     private WebTestClient webTestClient;

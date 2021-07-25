@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 @RestController
-@RequestMapping("/v1/account/types")
+@RequestMapping("/v1/accounts/types")
 public class AccountTypeController {
 
     private final AccountTypeRepository accountTypeRepository;
