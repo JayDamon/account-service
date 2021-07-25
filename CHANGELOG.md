@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.1.2](https://github.com/JayDamon/setzer-account-service/compare/v1.1.1...v1.1.2) (2021-07-25)
+
+
+### Bug Fixes
+
+* **flyway:** Properly setup flyway ([796675f](https://github.com/JayDamon/setzer-account-service/commit/796675fc2e258dc707f6c2b81d3aff718022f8e4))
+
 ## [1.1.1](https://github.com/JayDamon/setzer-account-service/compare/v1.1.0...v1.1.1) (2021-07-25)
 
 
