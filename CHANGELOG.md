@@ -1,5 +1,18 @@
 # Semantic Versioning Changelog
 
+# [1.1.0](https://github.com/JayDamon/setzer-account-service/compare/v1.0.1...v1.1.0) (2021-07-25)
+
+
+### Bug Fixes
+
+* **tests:** Use updated api paths ([4acd9ce](https://github.com/JayDamon/setzer-account-service/commit/4acd9cef028e9d62f62e8f5000d9b6eaecd8d19f))
+
+
+### Features
+
+* **api:** Update api to work with k8s gateway ([0120d9d](https://github.com/JayDamon/setzer-account-service/commit/0120d9d6d7dcff0c0e8418ec25f95e94769ff8bd))
+* **db:** Add flyway ([9f71128](https://github.com/JayDamon/setzer-account-service/commit/9f711280c5d2e3243a1a3a1d0aba24b254717272))
+
 ## [1.0.1](https://github.com/JayDamon/setzer-account-service/compare/v1.0.0...v1.0.1) (2021-07-21)
 
 
