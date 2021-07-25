@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.1.1](https://github.com/JayDamon/setzer-account-service/compare/v1.1.0...v1.1.1) (2021-07-25)
+
+
+### Bug Fixes
+
+* **discovery:** Use generic discovery client ([e609fe8](https://github.com/JayDamon/setzer-account-service/commit/e609fe88a639c841c5ce2085dd56518f81ef1067))
+
 # [1.1.0](https://github.com/JayDamon/setzer-account-service/compare/v1.0.1...v1.1.0) (2021-07-25)
 
 
