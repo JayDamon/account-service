@@ -3,11 +3,18 @@ spring:
     kubernetes:
       discovery:
         enabled: true
-        service-labels:
-          discoverable: true
+      loadbalancer:
+        enabled: false
       enabled: true
       reload:
         strategy: restart_context
         enabled: true
     discovery:
       enabled: false
+ribbon:
+  eureka:
+    enabled: false
+eureka:
+  client:
+    enabled: false
+    fetch-registry: false

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: setzer-account-service
+    name: moneymaker-account-service
 
 ---
 
