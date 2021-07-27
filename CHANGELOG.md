@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.2.2](https://github.com/JayDamon/setzer-account-service/compare/v1.2.1...v1.2.2) (2021-07-27)
+
+
+### Bug Fixes
+
+* Update h2 database ([0572ace](https://github.com/JayDamon/setzer-account-service/commit/0572ace2aab74683212c48b74e368f952b8c23b7))
+
 ## [1.2.1](https://github.com/JayDamon/setzer-account-service/compare/v1.2.0...v1.2.1) (2021-07-27)
 
 
