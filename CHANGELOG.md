@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.2.0](https://github.com/JayDamon/setzer-account-service/compare/v1.1.2...v1.2.0) (2021-07-27)
+
+
+### Features
+
+* **client:** Add local docker config ([a308e3d](https://github.com/JayDamon/setzer-account-service/commit/a308e3d56cfdde5f5bb960d83d97022a5c5b549f))
+
 ## [1.1.2](https://github.com/JayDamon/setzer-account-service/compare/v1.1.1...v1.1.2) (2021-07-25)
 
 
