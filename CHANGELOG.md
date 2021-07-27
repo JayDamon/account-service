@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.2.1](https://github.com/JayDamon/setzer-account-service/compare/v1.2.0...v1.2.1) (2021-07-27)
+
+
+### Bug Fixes
+
+* update imports ([bbc7010](https://github.com/JayDamon/setzer-account-service/commit/bbc7010312b02bdc973f9ccf7fb4c5769d9468c6))
+
 # [1.2.0](https://github.com/JayDamon/setzer-account-service/compare/v1.1.2...v1.2.0) (2021-07-27)
 
 
