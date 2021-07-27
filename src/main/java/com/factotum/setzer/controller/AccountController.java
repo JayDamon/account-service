@@ -30,7 +30,6 @@ public class AccountController {
 
     @GetMapping("/{id}")
     Mono<AccountDto> getAccountById(@PathVariable(name = "id") long id) {
-        log.info("Retrieving account {}", id);
         return this.accountRepository.findById(id).map(a -> new ModelMapper().map(a, AccountDto.class));
     }
 
