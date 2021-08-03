@@ -13,3 +13,15 @@ spring:
     locations: 'classpath:db/migration,test_data'
 server:
   port: 8083
+ribbon:
+  eureka:
+    enabled: true
+
+---
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/auth/realms/moneymaker
