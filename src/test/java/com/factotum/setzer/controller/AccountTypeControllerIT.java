@@ -30,7 +30,7 @@ public class AccountTypeControllerIT {
     @Test
     void getAccountTypes_GivenTypesExist_ThenReturnAllTypes() throws Exception {
 
-        EntityExchangeResult<byte[]> result =  webTestClient.get()
+        EntityExchangeResult<byte[]> result = webTestClient.get()
                 .uri(URI)
                 .exchange()
                 .expectStatus().isOk()

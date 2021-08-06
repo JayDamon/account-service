@@ -9,26 +9,29 @@ workflows:
 
 jobs:
   build-and-test:
+    branches:
+      only:
+        - main
     docker:
       - image: cimg/openjdk:16.0-node
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v1-gradle-debs-{{ checksum "build.gradle" }}
-            - v1-gradle-debs
+            - v1-maven-debs-{{ checksum "pom.xml" }}
+            - v1-maven-debs
       - run:
           name: Test
           command: |
-            chmod +x ./gradlew
-            ./gradlew clean test
+            chmod +x ./mvnw
+            ./mvnw clean test
       - run:
           name: Package
-          command: ./gradlew build -x test
+          command: ./mvnw clean package -DskipTests
       - save_cache:
-          key: v1-gradle-debs-{{ checksum "build.gradle" }}
+          key: v1-maven-debs-{{ checksum "pom.xml" }}
           paths:
-            - ~/.gradle
+            - ~/.m2
       - run:
           name: Setup VirtualEnv
           command: |
