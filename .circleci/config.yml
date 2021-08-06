@@ -6,12 +6,12 @@ workflows:
       - build-and-test:
           context:
             - docker-login
+          branches:
+            only:
+              - main
 
 jobs:
   build-and-test:
-    branches:
-      only:
-        - main
     docker:
       - image: cimg/openjdk:16.0-node
     steps:
