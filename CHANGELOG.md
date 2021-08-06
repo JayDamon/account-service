@@ -1,5 +1,24 @@
 # Semantic Versioning Changelog
 
+# [2.0.0](https://github.com/JayDamon/setzer-account-service/compare/v1.3.0...v2.0.0) (2021-08-06)
+
+
+### Bug Fixes
+
+* **ci:** Change docker file to point to maven output directory ([6705aef](https://github.com/JayDamon/setzer-account-service/commit/6705aef1f8a7718ea299d2c0c64ef2cd276c585a))
+* **ci:** Fix main branch only exclusion ([c373031](https://github.com/JayDamon/setzer-account-service/commit/c3730313896c2d7196873fe6a4947b90085c3fd7))
+
+
+### Features
+
+* **build:** Convert to maven ([5bdf5b6](https://github.com/JayDamon/setzer-account-service/commit/5bdf5b6cebc50c0f0a86d307ebe2eae17b8afac5))
+* **ci:** limit to only main branch for circle CI ([07c7455](https://github.com/JayDamon/setzer-account-service/commit/07c7455833d44573b8a684707733ff2054ece0a2))
+
+
+### BREAKING CHANGES
+
+* **build:** now usint maven instead of gradle to keep consistency for all apps
+
 # [1.3.0](https://github.com/JayDamon/setzer-account-service/compare/v1.2.2...v1.3.0) (2021-08-05)
 
 
