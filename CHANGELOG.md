@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [2.1.0](https://github.com/JayDamon/setzer-account-service/compare/v2.0.0...v2.1.0) (2021-08-08)
+
+
+### Features
+
+* **security:** Add discriminator based multi tenancy ([73eff6e](https://github.com/JayDamon/setzer-account-service/commit/73eff6ef3abc536d8de1b3cc38c3322fc175b2c2))
+
 # [2.0.0](https://github.com/JayDamon/setzer-account-service/compare/v1.3.0...v2.0.0) (2021-08-06)
 
 
