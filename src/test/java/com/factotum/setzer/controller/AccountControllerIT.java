@@ -3,6 +3,7 @@ package com.factotum.setzer.controller;
 import com.factotum.setzer.dto.AccountDto;
 import com.factotum.setzer.dto.AccountTypeDto;
 import com.factotum.setzer.repository.AccountRepository;
+import com.factotum.setzer.util.SecurityTestUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,7 @@ import java.math.BigDecimal;
 
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
+import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.mockJwt;
 
 @ActiveProfiles({"test"})
 @SpringBootTest
@@ -59,7 +61,9 @@ class AccountControllerIT {
     @Test
     void getAllAccounts_GivenAccountsExist_ThenReturnAccounts() {
 
-        webTestClient.get()
+        webTestClient
+                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
+                .get()
                 .uri(URI)
                 .exchange()
                 .expectStatus().isOk()
@@ -70,7 +74,9 @@ class AccountControllerIT {
     @Test
     void getAccountById_GivenAccountExists_ThenReturnAccount() {
 
-        webTestClient.get()
+        webTestClient
+                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
+                .get()
                 .uri(URI + "/{id}", 1L)
                 .exchange()
                 .expectStatus().isOk()
@@ -92,7 +98,9 @@ class AccountControllerIT {
         this.accountDto.setId(null);
         this.accountDto.setCurrentBalance(null);
 
-        EntityExchangeResult<byte[]> result =  webTestClient.post()
+        EntityExchangeResult<byte[]> result =  webTestClient
+                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
+                .post()
                 .uri(URI)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(this.accountDto))
@@ -123,7 +131,9 @@ class AccountControllerIT {
         account.setId(1L);
         account.setAccountType(accountType);
 
-        webTestClient.patch()
+        webTestClient
+                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
+                .patch()
                 .uri(URI + "/{id}", 1)
                 .body(BodyInserters.fromValue(account))
                 .exchange()
@@ -142,30 +152,14 @@ class AccountControllerIT {
         AccountDto account = new AccountDto();
         account.setAccountType(accountType);
 
-        webTestClient.patch()
+        webTestClient
+                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
+                .patch()
                 .uri(URI + "/{id}", 1)
                 .body(BodyInserters.fromValue(account))
                 .exchange()
                 .expectStatus().isBadRequest();
 
     }
-
-//    @Test
-//    void updateAccount_GivenAccountDoesNotExist_ThenReturnBadRequest() {
-//
-//        AccountTypeDto accountType = new AccountTypeDto();
-//        accountType.setId(3);
-//
-//        AccountDto account = new AccountDto();
-//        account.setId(8021L);
-//        account.setAccountType(accountType);
-//
-//        webTestClient.patch()
-//                .uri(URI + "/{id}", account.getId())
-//                .body(BodyInserters.fromValue(account))
-//                .exchange()
-//                .expectStatus().isBadRequest();
-//
-//    }
 
 }

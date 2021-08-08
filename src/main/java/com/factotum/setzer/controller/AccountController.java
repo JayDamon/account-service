@@ -4,8 +4,12 @@ import com.factotum.setzer.dto.AccountDto;
 import com.factotum.setzer.model.Account;
 import com.factotum.setzer.repository.AccountRepository;
 import com.factotum.setzer.service.AccountService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,13 +34,15 @@ public class AccountController {
     }
 
     @GetMapping("")
-    Flux<AccountDto> getAccounts() {
-        return this.accountRepository.queryAll();
+    Flux<AccountDto> getAccounts(JwtAuthenticationToken jwt) {
+        return this.accountRepository.queryAll(jwt.getToken());
     }
 
     @GetMapping("/{id}")
-    Mono<AccountDto> getAccountById(@PathVariable(name = "id") long id) {
-        return this.accountRepository.findById(id).map(a -> new ModelMapper().map(a, AccountDto.class));
+    Mono<AccountDto> getAccountById(JwtAuthenticationToken jwt, @PathVariable(name = "id") long id) {
+        return this.accountRepository
+                .queryByIdAndTenantId(id, jwt.getToken().getClaimAsString("sub"))
+                .map(a -> new ModelMapper().map(a, AccountDto.class));
     }
 
     @PostMapping("")

@@ -3,13 +3,21 @@ spring:
     discovery:
       enabled: true
   r2dbc:
-    url: r2dbc:pool:mysql://172.16.0.7:3306/mm_account_dev
-    username: app_user
-    password: 6NSMqvSszpKq42Jf
+    url: r2dbc:pool:mysql://localhost:3306/account
+    username: keycloak
+    password: password
   flyway:
-    url: jdbc:mysql://172.16.0.7:3306/mm_account_dev
+    url: jdbc:mysql://localhost:3306/account
     user: ${spring.r2dbc.username}
     password: ${spring.r2dbc.password}
-    baseline-on-migrate: true
 server:
   port: 8083
+
+---
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/auth/realms/moneymaker

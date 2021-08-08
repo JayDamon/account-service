@@ -46,4 +46,7 @@ public class Account implements Serializable {
     @Column("is_in_cash_flow")
     private Boolean isInCashFlow;
 
+    @Column("tenant_id")
+    private String tenantId;
+
 }

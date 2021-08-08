@@ -3,6 +3,7 @@ package com.factotum.setzer.repository;
 import com.factotum.setzer.dto.AccountDto;
 import com.factotum.setzer.mapper.AccountMapper;
 import org.springframework.r2dbc.core.DatabaseClient;
+import org.springframework.security.oauth2.jwt.Jwt;
 import reactor.core.publisher.Flux;
 
 public class AccountRepositoryCustomImpl implements AccountRepositoryCustom {
@@ -17,11 +18,11 @@ public class AccountRepositoryCustomImpl implements AccountRepositoryCustom {
             "at.full_account_type, at.short_account_type, " +
             "a.starting_balance, a.current_balance, a.is_primary_account, a.is_in_cash_flow " +
             "FROM account a " +
-            "LEFT JOIN account_type at ON at.account_type_id = a.account_type_id";
+            "LEFT JOIN account_type at ON at.account_type_id = a.account_type_id " +
+            "WHERE a.tenant_id = :tenantId";
 
     @Override
-    public Flux<AccountDto> queryAll() {
-
-        return this.databaseClient.sql(SELECT_QUERY).map(new AccountMapper()::apply).all();
+    public Flux<AccountDto> queryAll(Jwt jwt) {
+        return this.databaseClient.sql(SELECT_QUERY).bind("tenantId", jwt.getClaimAsString("sub")).map(new AccountMapper()::apply).all();
     }
 }
