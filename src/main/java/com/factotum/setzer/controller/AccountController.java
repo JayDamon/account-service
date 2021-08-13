@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -46,7 +49,7 @@ public class AccountController {
     }
 
     @PostMapping("")
-    Mono<AccountDto> create(@RequestBody AccountDto newAccount) {
+    Mono<AccountDto> create(@Valid @RequestBody AccountDto newAccount) {
         Account account = new ModelMapper().map(newAccount, Account.class);
         return this.accountRepository.save(account).map(a -> new ModelMapper().map(a, AccountDto.class));
     }

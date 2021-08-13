@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -22,12 +23,15 @@ public class AccountDto implements Serializable {
     @JsonProperty("id")
     private Long id;
 
+    @NotNull
     @JsonProperty("name")
     private String name;
 
+    @NotNull
     @JsonProperty("type")
     private AccountTypeDto accountType;
 
+    @NotNull
     @JsonProperty("startingBalance")
     private BigDecimal startingBalance;
 
