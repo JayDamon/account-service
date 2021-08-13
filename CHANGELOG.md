@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [2.1.1](https://github.com/JayDamon/setzer-account-service/compare/v2.1.0...v2.1.1) (2021-08-13)
+
+
+### Bug Fixes
+
+* **account:** Validate Account dto on create ([ebae856](https://github.com/JayDamon/setzer-account-service/commit/ebae8564d922fe09f78658da962560a41d1ed59b))
+
 # [2.1.0](https://github.com/JayDamon/setzer-account-service/compare/v2.0.0...v2.1.0) (2021-08-08)
 
 
