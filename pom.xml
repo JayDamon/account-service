@@ -13,7 +13,7 @@
 
     <groupId>com.factotum</groupId>
     <artifactId>setzer</artifactId>
-    <version>2.1.1</version>
+    <version>2.1.2</version>
     <name>setzer-account-service</name>
     <description>Oaka XIII is a traveling merchant who sells items and equipment to the player. He
         is Yunas devout supporter.

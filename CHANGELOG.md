@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [2.1.2](https://github.com/JayDamon/setzer-account-service/compare/v2.1.1...v2.1.2) (2021-08-13)
+
+
+### Bug Fixes
+
+* **kubernetes:** Use fabric8 client to avoid log error" ([429b780](https://github.com/JayDamon/setzer-account-service/commit/429b780a87366234bca5fbc200af4a58bc88e641))
+
 ## [2.1.1](https://github.com/JayDamon/setzer-account-service/compare/v2.1.0...v2.1.1) (2021-08-13)
 
 
