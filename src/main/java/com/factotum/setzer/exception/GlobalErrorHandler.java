@@ -8,6 +8,8 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.lang.NonNull;
+import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -18,14 +20,17 @@ import javax.validation.ConstraintViolationException;
 @Order(-2)
 public class GlobalErrorHandler implements ErrorWebExceptionHandler {
 
+    @NonNull
     @Override
-    public Mono<Void> handle(ServerWebExchange serverWebExchange, Throwable throwable) {
+    public Mono<Void> handle(ServerWebExchange serverWebExchange, @NonNull Throwable throwable) {
 
         log.error(throwable.getMessage(), throwable);
 
         DataBufferFactory bufferFactory = serverWebExchange.getResponse().bufferFactory();
 
-        if (throwable instanceof ConstraintViolationException || throwable instanceof IllegalArgumentException) {
+        if (throwable instanceof ConstraintViolationException
+                || throwable instanceof IllegalArgumentException
+                || throwable instanceof WebExchangeBindException) {
 
             serverWebExchange.getResponse().setStatusCode(HttpStatus.BAD_REQUEST);
             DataBuffer dataBuffer = bufferFactory.wrap(throwable.getMessage().getBytes());

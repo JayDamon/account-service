@@ -58,6 +58,7 @@ class AccountControllerIT {
         accountDto.setIsInCashFlow(false);
     }
 
+    // getAllAccounts
     @Test
     void getAllAccounts_GivenAccountsExist_ThenReturnAccounts() {
 
@@ -71,6 +72,7 @@ class AccountControllerIT {
 
     }
 
+    // getAccountById
     @Test
     void getAccountById_GivenAccountExists_ThenReturnAccount() {
 
@@ -92,6 +94,7 @@ class AccountControllerIT {
 
     }
 
+    // createNewAccount
     @Test
     void createNewAccount_GivenValidAccountProvided_ThenReturnCreatedAccount() throws IOException {
 
@@ -121,6 +124,58 @@ class AccountControllerIT {
         accountRepository.deleteById(node.get("id").asLong()).block();
     }
 
+    @Test
+    void createNewAccount_GivenAccountMissingName_ThenReturnBadRequest() {
+
+        this.accountDto.setId(null);
+        this.accountDto.setCurrentBalance(null);
+        this.accountDto.setName(null);
+
+        webTestClient
+                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
+                .post()
+                .uri(URI)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(this.accountDto))
+                .exchange()
+                .expectStatus().isBadRequest();
+    }
+
+    @Test
+    void createNewAccount_GivenAccountMissingAccountType_ThenReturnBadRequest() {
+
+        this.accountDto.setId(null);
+        this.accountDto.setCurrentBalance(null);
+        this.accountDto.setAccountType(null);
+
+        webTestClient
+                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
+                .post()
+                .uri(URI)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(this.accountDto))
+                .exchange()
+                .expectStatus().isBadRequest();
+    }
+
+    @Test
+    void createNewAccount_GivenAccountMissingStartingBalance_ThenReturnBadRequest() {
+
+        this.accountDto.setId(null);
+        this.accountDto.setCurrentBalance(null);
+        this.accountDto.setStartingBalance(null);
+
+        webTestClient
+                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
+                .post()
+                .uri(URI)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(this.accountDto))
+                .exchange()
+                .expectStatus().isBadRequest();
+    }
+
+    // updateAccount
     @Test
     void updateAccount_GivenAccountExists_ThenUpdateFields() {
 
