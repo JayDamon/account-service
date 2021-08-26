@@ -20,17 +20,21 @@ public class TenantBeforeConvertCallback implements BeforeConvertCallback<Accoun
     @Override
     @NonNull
     public Publisher<Account> onBeforeConvert(@NonNull Account entity, @NonNull SqlIdentifier table) {
+
+        if (entity.getTenantId() != null) return Mono.just(entity);
+
         return ReactiveSecurityContextHolder.getContext()
                 .map(SecurityContext::getAuthentication)
                 .map(Authentication::getPrincipal)
                 .cast(Jwt.class)
                 .flatMap(jwt -> {
-                    String tenantId = (String)jwt.getClaims().get("sub");
+                    String tenantId = (String) jwt.getClaims().get("sub");
                     if (entity.getTenantId() != null && !entity.getTenantId().equals(tenantId)) {
                         return Mono.empty();
                     }
                     entity.setTenantId(tenantId);
                     return Mono.just(entity);
-                });
+                })
+                .doOnError(t -> log.error("Failed to set Tenant Id", t));
     }
 }
