@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [2.2.0](https://github.com/JayDamon/setzer-account-service/compare/v2.1.2...v2.2.0) (2021-08-26)
+
+
+### Features
+
+* **rabbit:** Add rabbit mq messaging queue for async communication ([98ac2e3](https://github.com/JayDamon/setzer-account-service/commit/98ac2e34a5056c9dbed37a6f1a565e4ac0a5485f))
+
 ## [2.1.2](https://github.com/JayDamon/setzer-account-service/compare/v2.1.1...v2.1.2) (2021-08-13)
 
 
