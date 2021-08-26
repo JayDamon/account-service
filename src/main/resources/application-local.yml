@@ -25,3 +25,16 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8081/auth/realms/moneymaker
+
+---
+
+spring:
+  rabbitmq:
+    username: test
+    password: test
+
+---
+
+logging:
+  level:
+    io.r2dbc: DEBUG
