@@ -32,9 +32,5 @@ spring:
   rabbitmq:
     username: test
     password: test
-
----
-
-logging:
-  level:
-    io.r2dbc: DEBUG
+    host: localhost
+    port: 5672
