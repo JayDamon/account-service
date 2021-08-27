@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [2.2.1](https://github.com/JayDamon/setzer-account-service/compare/v2.2.0...v2.2.1) (2021-08-27)
+
+
+### Bug Fixes
+
+* **account:** Fix issue when current balance is not set in account table ([f2f167b](https://github.com/JayDamon/setzer-account-service/commit/f2f167b37d7d0fe077d4e8d5ec04972ebdbfca18))
+
 # [2.2.0](https://github.com/JayDamon/setzer-account-service/compare/v2.1.2...v2.2.0) (2021-08-26)
 
 
