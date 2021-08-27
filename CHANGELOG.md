@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [2.2.2](https://github.com/JayDamon/setzer-account-service/compare/v2.2.1...v2.2.2) (2021-08-27)
+
+
+### Bug Fixes
+
+* **db:** Fix order of db upgrade statements ([1717dcd](https://github.com/JayDamon/setzer-account-service/commit/1717dcd45ef5fc36f01aeac103204806ec8e2367))
+
 ## [2.2.1](https://github.com/JayDamon/setzer-account-service/compare/v2.2.0...v2.2.1) (2021-08-27)
 
 
