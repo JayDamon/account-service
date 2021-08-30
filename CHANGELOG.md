@@ -1,5 +1,13 @@
 # Semantic Versioning Changelog
 
+## [2.2.3](https://github.com/JayDamon/setzer-account-service/compare/v2.2.2...v2.2.3) (2021-08-30)
+
+
+### Bug Fixes
+
+* **account:** Change current balance on starting balance change ([7519a96](https://github.com/JayDamon/setzer-account-service/commit/7519a9632775b3cd2627c9f1395c9fb649d325b3))
+* **account:** Update current balance when new account is created ([5d2a0c7](https://github.com/JayDamon/setzer-account-service/commit/5d2a0c7b2c7cc4adc105342bbc7ab39288671121))
+
 ## [2.2.2](https://github.com/JayDamon/setzer-account-service/compare/v2.2.1...v2.2.2) (2021-08-27)
 
 
