@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [2.3.0](https://github.com/JayDamon/setzer-account-service/compare/v2.2.3...v2.3.0) (2021-11-13)
+
+
+### Features
+
+* **jdk:** Java 17 upgrade ([a12bc84](https://github.com/JayDamon/setzer-account-service/commit/a12bc84191f38b56eb23dbafa55ab83539f12dbe))
+
 ## [2.2.3](https://github.com/JayDamon/setzer-account-service/compare/v2.2.2...v2.2.3) (2021-08-30)
 
 
