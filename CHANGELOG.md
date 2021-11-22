@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [2.4.0](https://github.com/JayDamon/setzer-account-service/compare/v2.3.0...v2.4.0) (2021-11-22)
+
+
+### Features
+
+* **ci:** Update ci with new build script ([d7b37ad](https://github.com/JayDamon/setzer-account-service/commit/d7b37adf7351653659a1633dff3d1f215b40f700))
+
 # [2.3.0](https://github.com/JayDamon/setzer-account-service/compare/v2.2.3...v2.3.0) (2021-11-13)
 
 
