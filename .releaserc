@@ -1,6 +1,6 @@
 {
   "branches": ["main"],
-  "repositoryUrl":"https://github.com/JayDamon/setzer-account-service.git",
+  "repositoryUrl":"https://github.com/JayDamon/account-service.git",
   "debug": "true",
   "plugins": [
     "@semantic-release/commit-analyzer",
