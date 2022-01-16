@@ -16,3 +16,21 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://mm-eureka:8761/eureka/
+
+---
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:8081/auth/realms/moneymaker
+
+---
+
+spring:
+  rabbitmq:
+    username: test
+    password: test
+    host: mm-mq
+    port: 5672
