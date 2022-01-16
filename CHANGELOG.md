@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [2.4.1](https://github.com/JayDamon/account-service/compare/v2.4.0...v2.4.1) (2022-01-16)
+
+
+### Bug Fixes
+
+* **build:** Update docker java version ([08cae3b](https://github.com/JayDamon/account-service/commit/08cae3b381dbdce3d2602c8419f462c7e14c9d0a))
+
 # [2.4.0](https://github.com/JayDamon/setzer-account-service/compare/v2.3.0...v2.4.0) (2021-11-22)
 
 
