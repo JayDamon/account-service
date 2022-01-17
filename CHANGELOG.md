@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [2.5.0](https://github.com/JayDamon/account-service/compare/v2.4.2...v2.5.0) (2022-01-17)
+
+
+### Features
+
+* **spring:** update spring boot and spring cloud version ([d0e42ae](https://github.com/JayDamon/account-service/commit/d0e42ae08e814763577cdf9a1a180d6e8ee0fa51))
+
 ## [2.4.2](https://github.com/JayDamon/account-service/compare/v2.4.1...v2.4.2) (2022-01-16)
 
 
