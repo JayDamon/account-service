@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [2.4.2](https://github.com/JayDamon/account-service/compare/v2.4.1...v2.4.2) (2022-01-16)
+
+
+### Bug Fixes
+
+* **local:** add local docker config for keycloak and rabbitmq ([7e0910e](https://github.com/JayDamon/account-service/commit/7e0910e30241d22ecf12978cb8f10c50a8db781a))
+
 ## [2.4.1](https://github.com/JayDamon/account-service/compare/v2.4.0...v2.4.1) (2022-01-16)
 
 

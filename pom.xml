@@ -13,7 +13,7 @@
 
     <groupId>com.factotum</groupId>
     <artifactId>account-service</artifactId>
-    <version>2.4.1</version>
+    <version>2.4.2</version>
     <name>account-service</name>
     <description>Account service for the MoneyMaker application</description>
 
