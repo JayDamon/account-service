@@ -12,6 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -32,7 +33,7 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    Mono<AccountDto> getAccountById(JwtAuthenticationToken jwt, @PathVariable(name = "id") long id) {
+    Mono<AccountDto> getAccountById(JwtAuthenticationToken jwt, @PathVariable(name = "id") UUID id) {
         return this.accountRepository
                 .queryByIdAndTenantId(id, jwt.getToken().getClaimAsString("sub"))
                 .map(a -> new ModelMapper().map(a, AccountDto.class));
@@ -46,13 +47,13 @@ public class AccountController {
     }
 
     @PatchMapping("/{id}")
-    Mono<AccountDto> updateAccount(@PathVariable long id, @RequestBody AccountDto account) {
+    Mono<AccountDto> updateAccount(@PathVariable UUID id, @RequestBody AccountDto account) {
 
         if (account.getId() == null) {
             throw new IllegalArgumentException("Valid account id must be provided");
         }
 
-        if (id != account.getId()) {
+        if (!id.equals(account.getId())) {
             throw new IllegalArgumentException("Path id and body id must match");
         }
 

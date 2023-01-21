@@ -8,6 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @ToString
@@ -22,13 +23,13 @@ public class Account implements Serializable {
 
     @Id
     @Column("account_id")
-    private Long id;
+    private UUID id;
 
     @Column("name")
     private String name;
 
     @Column("account_type_id")
-    private Integer accountTypeId;
+    private UUID accountTypeId;
 
     @Column("starting_balance")
     private BigDecimal startingBalance;

@@ -5,9 +5,11 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
-@Repository
-public interface AccountRepository extends ReactiveCrudRepository<Account, Long>, AccountRepositoryCustom {
+import java.util.UUID;
 
-    Mono<Account> queryByIdAndTenantId(long id, String tenantId);
+@Repository
+public interface AccountRepository extends ReactiveCrudRepository<Account, UUID>, AccountRepositoryCustom {
+
+    Mono<Account> queryByIdAndTenantId(UUID id, String tenantId);
 
 }

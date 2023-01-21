@@ -7,6 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Data
 @ToString
@@ -21,7 +22,7 @@ public class AccountType implements Serializable {
 
     @Id
     @Column("account_type_id")
-    private Integer id;
+    private UUID id;
 
     @Column("full_account_type")
     private String fullName;

@@ -2,6 +2,7 @@ package com.factotum.accountservice.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -20,6 +21,7 @@ import static org.hamcrest.Matchers.hasSize;
 @SpringBootTest
 @AutoConfigureWebTestClient
 @WithMockUser
+@AutoConfigureEmbeddedDatabase
 public class AccountTypeControllerIntegrationTest {
 
     private static final String URI = "/v1/accounts/types";

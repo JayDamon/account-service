@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @ToString
@@ -21,7 +22,7 @@ public class AccountDto implements Serializable {
     private static final long serialVersionUID = 1;
 
     @JsonProperty("id")
-    private Long id;
+    private UUID id;
 
     @NotNull
     @JsonProperty("name")
