@@ -12,7 +12,7 @@ import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator;
 
 @Configuration
 @EnableR2dbcRepositories(basePackages = {"com.factotum.accountservice.repository"})
-public class JpaConfiguration {
+public class JpaConfig {
 
     @Bean
     @Profile({"test"})
