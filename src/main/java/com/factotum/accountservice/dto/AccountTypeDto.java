@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Data
 @ToString
@@ -19,7 +20,7 @@ public class AccountTypeDto implements Serializable {
     private static final long serialVersionUID = 1;
 
     @JsonProperty("id")
-    private Integer id;
+    private UUID id;
 
     @JsonProperty("fullName")
     private String fullName;

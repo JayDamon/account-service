@@ -1,6 +1,10 @@
 package com.factotum.accountservice.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -8,6 +12,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @ToString
@@ -22,13 +27,13 @@ public class Account implements Serializable {
 
     @Id
     @Column("account_id")
-    private Long id;
+    private UUID id;
 
     @Column("name")
     private String name;
 
     @Column("account_type_id")
-    private Integer accountTypeId;
+    private UUID accountTypeId;
 
     @Column("starting_balance")
     private BigDecimal startingBalance;
