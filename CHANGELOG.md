@@ -1,5 +1,23 @@
 # Semantic Versioning Changelog
 
+# [3.0.0](https://github.com/JayDamon/account-service/compare/v2.5.0...v3.0.0) (2024-09-23)
+
+
+* Update Spring and Convert to Spring 3 ([#11](https://github.com/JayDamon/account-service/issues/11)) ([1f6f1e3](https://github.com/JayDamon/account-service/commit/1f6f1e37e64b1b5c46e285543b6da3722156897c))
+
+
+### Bug Fixes
+
+* add github login for semantic release ([870a661](https://github.com/JayDamon/account-service/commit/870a661e932ee4b0ebedf3067424c559fe27d7b6))
+* Run ci ([#12](https://github.com/JayDamon/account-service/issues/12)) ([959854b](https://github.com/JayDamon/account-service/commit/959854b100813d2cca75e91249724d9760f253aa))
+
+
+### BREAKING CHANGES
+
+* Upgrade to spring boot 3.0 and spring cloud 2022
+
+* refactor: Optimize imports
+
 # [2.5.0](https://github.com/JayDamon/account-service/compare/v2.4.2...v2.5.0) (2022-01-17)
 
 
