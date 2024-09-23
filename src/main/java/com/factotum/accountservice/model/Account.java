@@ -32,20 +32,41 @@ public class Account implements Serializable {
     @Column("name")
     private String name;
 
-    @Column("account_type_id")
-    private UUID accountTypeId;
+    @Column("plaid_id")
+    private String plaidId;
+
+    @Column("item_id")
+    private String itemId;
+
+    @Column("official_name")
+    private String officialName;
+
+    @Column("available_balance")
+    private BigDecimal availableBalance;
+
+    @Column("current_balance")
+    private BigDecimal currentBalance;
 
     @Column("starting_balance")
     private BigDecimal startingBalance;
 
-    @Column("current_balance")
-    private BigDecimal currentBalance;
+    @Column("account_limit")
+    private BigDecimal limit;
 
     @Column("is_primary_account")
     private Boolean isPrimaryAccount;
 
     @Column("is_in_cash_flow")
     private Boolean isInCashFlow;
+
+    @Column("account_type_id")
+    private UUID accountTypeId;
+
+    @Column("account_type")
+    private String accountTypeName;
+
+    @Column("account_sub_type")
+    private String accountSubTypeName;
 
     @Column("tenant_id")
     private String tenantId;

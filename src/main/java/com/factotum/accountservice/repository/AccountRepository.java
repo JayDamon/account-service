@@ -12,4 +12,6 @@ public interface AccountRepository extends ReactiveCrudRepository<Account, UUID>
 
     Mono<Account> queryByIdAndTenantId(UUID id, String tenantId);
 
+    Mono<Account> queryByPlaidIdAndTenantId(String plaidId, String tenantId);
+
 }

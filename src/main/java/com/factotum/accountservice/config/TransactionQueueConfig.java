@@ -11,7 +11,7 @@ public class TransactionQueueConfig {
     public static final String TRANSACTION_CHANGE = "transaction_change";
 
     @Bean
-    Queue transactionQueue() {
+    public Queue transactionQueue() {
         return new Queue(TRANSACTION_CHANGE, false);
     }
 

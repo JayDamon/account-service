@@ -13,19 +13,25 @@ CREATE TABLE IF NOT EXISTS account
 (
     account_id         uuid DEFAULT uuid_generate_v4() not null,
     name               varchar(255),
-    starting_balance   decimal,
+    plaid_id           varchar(255),
+    item_id            varchar(255),
+    official_name      varchar(255),
+    available_balance  decimal,
     current_balance    decimal NOT NULL,
+    starting_balance   decimal,
+    account_limit      decimal,
     is_primary_account boolean,
     is_in_cash_flow    boolean,
     account_type_id    uuid,
+    account_type       varchar(255),
+    account_sub_type   varchar(255),
     tenant_id          varchar(255),
     PRIMARY KEY (account_id),
     FOREIGN KEY (account_type_id) REFERENCES account_type (account_type_id)
 );
 
-INSERT INTO account_type(account_type_id,full_account_type,short_account_type)
-VALUES
-       ('09a3b555-ea95-4f5b-a4e5-660d5f3657e5', 'Basic Checking', 'Checking'),
+INSERT INTO account_type(account_type_id, full_account_type, short_account_type)
+VALUES ('09a3b555-ea95-4f5b-a4e5-660d5f3657e5', 'Basic Checking', 'Checking'),
        ('e20209f2-9ec6-40f8-9478-ac0e5dd91c7b', 'Savings', 'Savings'),
        ('105e53a4-a1cd-4b2e-97fc-82faae39d355', 'Interest Bearing Checking', 'Interest'),
        ('e7544f6b-f58a-45c6-9675-8a4eb06815ab', 'Money Market', 'MM'),

@@ -100,7 +100,11 @@ class AccountControllerIntegrationTest {
                 .jsonPath("$.isPrimary").isEqualTo(true)
                 .jsonPath("$.isInCashFlow").isEqualTo(true)
                 .jsonPath("$.type").exists()
-                .jsonPath("$.type.id").isEqualTo(accountTypeIdOne.toString());
+                .jsonPath("$.type.id").isEqualTo(accountTypeIdOne.toString())
+                .jsonPath("$.limit").doesNotExist()
+                .jsonPath("$.availableBalance").isEqualTo(8000.56)
+                .jsonPath("$.accountType").isEqualTo("depository")
+                .jsonPath("$.accountSubType").isEqualTo("checking");
 
     }
 

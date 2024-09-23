@@ -32,6 +32,9 @@ public class AccountDto implements Serializable {
     @JsonProperty("type")
     private AccountTypeDto accountType;
 
+    @JsonProperty("availableBalance")
+    private BigDecimal availableBalance;
+
     @NotNull
     @JsonProperty("startingBalance")
     private BigDecimal startingBalance;
@@ -39,10 +42,18 @@ public class AccountDto implements Serializable {
     @JsonProperty("currentBalance")
     private BigDecimal currentBalance;
 
+    @JsonProperty("limit")
+    private BigDecimal limit;
+
     @JsonProperty("isPrimary")
     private Boolean isPrimaryAccount;
 
     @JsonProperty("isInCashFlow")
     private Boolean isInCashFlow;
 
+    @JsonProperty("accountType")
+    private String accountTypeName;
+
+    @JsonProperty("accountSubType")
+    private String accountSubTypeName;
 }
