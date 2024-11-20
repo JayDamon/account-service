@@ -1,5 +1,6 @@
 package com.factotum.accountservice.reciever;
 
+import com.factotum.accountservice.message.UpdateAccountItemMessage;
 import com.factotum.accountservice.message.UpdateAccountMessage;
 import com.factotum.accountservice.model.Account;
 import com.factotum.accountservice.repository.AccountRepository;
@@ -7,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -20,19 +22,21 @@ public class UpdateAccountQueueLReceiver {
     }
 
     @RabbitListener(queues = "#{updateAccountQueue.name}")
-    void receiveMessage(UpdateAccountMessage updateAccount) {
+    void receiveMessage(UpdateAccountItemMessage accountItemMessage) {
 
-        this.accountRepository.queryByPlaidIdAndTenantId(updateAccount.getPlaidId(), updateAccount.getTenantId())
-                .switchIfEmpty(createNewAccount(updateAccount))
-                .map(account -> {
+        Flux.fromIterable(accountItemMessage.getAccounts())
+                .map(updateAccount ->
+                        this.accountRepository.queryByPlaidIdAndTenantId(updateAccount.getPlaidId(), updateAccount.getTenantId())
+                                .switchIfEmpty(createNewAccount(updateAccount))
+                                .map(account -> {
 
-                    new ModelMapper().map(updateAccount, account);
+                                    new ModelMapper().map(updateAccount, account);
 
-                    log.atDebug().log("Saved new account {}", account);
+                                    log.atDebug().log("Saved new account {}", account);
 
-                    return this.accountRepository.save(account).subscribe();
-                })
-                .subscribe();
+                                    return this.accountRepository.save(account).subscribe();
+                                }).subscribe()
+                ).subscribe();
     }
 
     private Mono<Account> createNewAccount(UpdateAccountMessage updateAccount) {
