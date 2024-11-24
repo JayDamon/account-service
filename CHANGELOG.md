@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [3.1.0](https://github.com/JayDamon/account-service/compare/v3.0.0...v3.1.0) (2024-11-24)
+
+
+### Features
+
+* update account type names for mapping ([f2bec31](https://github.com/JayDamon/account-service/commit/f2bec3102755d1be3a4835aabb97cf58a57e9992))
+
 # [3.0.0](https://github.com/JayDamon/account-service/compare/v2.5.0...v3.0.0) (2024-09-23)
 
 
