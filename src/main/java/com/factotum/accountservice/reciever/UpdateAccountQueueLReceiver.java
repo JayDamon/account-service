@@ -24,6 +24,8 @@ public class UpdateAccountQueueLReceiver {
     @RabbitListener(queues = "#{updateAccountQueue.name}")
     void receiveMessage(UpdateAccountItemMessage accountItemMessage) {
 
+        log.atDebug().log("Received update account item message: {}", accountItemMessage);
+
         Flux.fromIterable(accountItemMessage.getAccounts())
                 .map(updateAccount ->
                         this.accountRepository.queryByPlaidIdAndTenantId(updateAccount.getPlaidId(), updateAccount.getTenantId())

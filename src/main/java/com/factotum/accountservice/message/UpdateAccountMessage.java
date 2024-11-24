@@ -40,9 +40,9 @@ public class UpdateAccountMessage implements Serializable {
     private BigDecimal limit;
 
     @JsonProperty("accountType")
-    private String accountType;
+    private String accountTypeName;
 
     @JsonProperty("accountSubType")
-    private String accountSubType;
+    private String accountSubTypeName;
 
 }
