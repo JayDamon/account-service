@@ -1,42 +1,35 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TABLE IF NOT EXISTS account_type
+CREATE TABLE IF NOT EXISTS item
 (
-    account_type_id    uuid DEFAULT uuid_generate_v4() not null,
-    full_account_type  varchar(255),
-    short_account_type varchar(255),
-    PRIMARY KEY (account_type_id)
+    item_id          varchar(255) not null,
+    institution_id   varchar(255),
+    institution_name varchar(255),
+    url              varchar(255),
+    primary_color     varchar(255),
+    logo             varchar(255),
+    tenant_id        varchar(255),
+    PRIMARY KEY (item_id)
 );
-
 
 CREATE TABLE IF NOT EXISTS account
 (
     account_id         uuid DEFAULT uuid_generate_v4() not null,
+    friendly_name      varchar(255),
     name               varchar(255),
+    mask               varchar(255),
     plaid_id           varchar(255),
     item_id            varchar(255),
     official_name      varchar(255),
     available_balance  decimal,
-    current_balance    decimal NOT NULL,
+    current_balance    decimal                         NOT NULL,
     starting_balance   decimal,
     account_limit      decimal,
     is_primary_account boolean,
     is_in_cash_flow    boolean,
-    account_type_id    uuid,
     account_type       varchar(255),
     account_sub_type   varchar(255),
     tenant_id          varchar(255),
     PRIMARY KEY (account_id),
-    FOREIGN KEY (account_type_id) REFERENCES account_type (account_type_id)
+    FOREIGN KEY (item_id) REFERENCES item (item_id)
 );
-
-INSERT INTO account_type(account_type_id, full_account_type, short_account_type)
-VALUES ('09a3b555-ea95-4f5b-a4e5-660d5f3657e5', 'Basic Checking', 'Checking'),
-       ('e20209f2-9ec6-40f8-9478-ac0e5dd91c7b', 'Savings', 'Savings'),
-       ('105e53a4-a1cd-4b2e-97fc-82faae39d355', 'Interest Bearing Checking', 'Interest'),
-       ('e7544f6b-f58a-45c6-9675-8a4eb06815ab', 'Money Market', 'MM'),
-       ('3b858d4b-912c-4821-9933-2bae982a1644', 'Certification of Deposit', 'CD'),
-       ('690048ab-ee21-4abf-b328-37cb9be92a20', 'Investment Retirement', 'Retirement'),
-       ('242f768e-337c-4398-a845-6ea24b6e82dd', 'Brokerage', 'Brokerage'),
-       ('2ecb00fd-1163-4a0d-885b-2b45d851bdde', 'Credit Card', 'Credit Card');
-

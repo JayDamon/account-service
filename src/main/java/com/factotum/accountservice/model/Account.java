@@ -29,6 +29,12 @@ public class Account implements Serializable {
     @Column("account_id")
     private UUID id;
 
+    @Column("mask")
+    private String mask;
+
+    @Column("friendly_name")
+    private String friendlyName;
+
     @Column("name")
     private String name;
 
@@ -58,9 +64,6 @@ public class Account implements Serializable {
 
     @Column("is_in_cash_flow")
     private Boolean isInCashFlow;
-
-    @Column("account_type_id")
-    private UUID accountTypeId;
 
     @Column("account_type")
     private String accountTypeName;

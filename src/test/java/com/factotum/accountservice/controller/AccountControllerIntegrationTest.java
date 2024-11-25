@@ -1,25 +1,19 @@
 package com.factotum.accountservice.controller;
 
 import com.factotum.accountservice.dto.AccountDto;
-import com.factotum.accountservice.dto.AccountTypeDto;
 import com.factotum.accountservice.repository.AccountRepository;
 import com.factotum.accountservice.util.SecurityTestUtil;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -52,15 +46,9 @@ class AccountControllerIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        AccountTypeDto accountTypeDto = new AccountTypeDto();
-        accountTypeDto.setId(accountTypeIdTwo);
-        accountTypeDto.setFullName("Savings");
-        accountTypeDto.setShortName("Savings");
-
         accountDto = new AccountDto();
         accountDto.setId(accountIdOne);
         accountDto.setName("NewName");
-        accountDto.setAccountType(accountTypeDto);
         accountDto.setStartingBalance(BigDecimal.valueOf(500.01));
         accountDto.setCurrentBalance(BigDecimal.valueOf(200));
         accountDto.setIsPrimaryAccount(false);
@@ -99,8 +87,6 @@ class AccountControllerIntegrationTest {
                 .jsonPath("$.currentBalance").isEqualTo(8000.56)
                 .jsonPath("$.isPrimary").isEqualTo(true)
                 .jsonPath("$.isInCashFlow").isEqualTo(true)
-                .jsonPath("$.type").exists()
-                .jsonPath("$.type.id").isEqualTo(accountTypeIdOne.toString())
                 .jsonPath("$.limit").doesNotExist()
                 .jsonPath("$.availableBalance").isEqualTo(8000.56)
                 .jsonPath("$.accountType").isEqualTo("depository")
@@ -108,124 +94,34 @@ class AccountControllerIntegrationTest {
 
     }
 
-    // createNewAccount
+    // updateAccountName
     @Test
-    void createNewAccount_GivenValidAccountProvided_ThenReturnCreatedAccount() throws IOException {
-
-        this.accountDto.setId(null);
-        this.accountDto.setCurrentBalance(null);
-
-        EntityExchangeResult<byte[]> result =  webTestClient
-                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
-                .post()
-                .uri(URI)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(this.accountDto))
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody()
-                .jsonPath("$.id").value(not(nullValue()))
-                .jsonPath("$.name").isEqualTo(this.accountDto.getName())
-                .jsonPath("$.startingBalance").isEqualTo(this.accountDto.getStartingBalance().doubleValue())
-                .jsonPath("$.isPrimary").isEqualTo(this.accountDto.getIsPrimaryAccount())
-                .jsonPath("$.isInCashFlow").isEqualTo(this.accountDto.getIsInCashFlow())
-                .jsonPath("$.type").exists()
-                .jsonPath("$.type.id").isEqualTo(this.accountDto.getAccountType().getId().toString())
-                .returnResult();
-
-        JsonNode node = new ObjectMapper().readTree(result.getResponseBody());
-
-        accountRepository.deleteById(UUID.fromString(node.get("id").asText())).block();
-    }
-
-    @Test
-    void createNewAccount_GivenAccountMissingName_ThenReturnBadRequest() {
-
-        this.accountDto.setId(null);
-        this.accountDto.setCurrentBalance(null);
-        this.accountDto.setName(null);
-
-        webTestClient
-                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
-                .post()
-                .uri(URI)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(this.accountDto))
-                .exchange()
-                .expectStatus().isBadRequest();
-    }
-
-    @Test
-    void createNewAccount_GivenAccountMissingAccountType_ThenReturnBadRequest() {
-
-        this.accountDto.setId(null);
-        this.accountDto.setCurrentBalance(null);
-        this.accountDto.setAccountType(null);
-
-        webTestClient
-                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
-                .post()
-                .uri(URI)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(this.accountDto))
-                .exchange()
-                .expectStatus().isBadRequest();
-    }
-
-    @Test
-    void createNewAccount_GivenAccountMissingStartingBalance_ThenReturnBadRequest() {
-
-        this.accountDto.setId(null);
-        this.accountDto.setCurrentBalance(null);
-        this.accountDto.setStartingBalance(null);
-
-        webTestClient
-                .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
-                .post()
-                .uri(URI)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(this.accountDto))
-                .exchange()
-                .expectStatus().isBadRequest();
-    }
-
-    // updateAccount
-    @Test
-    void updateAccount_GivenAccountExists_ThenUpdateFields() {
-
-        AccountTypeDto accountType = new AccountTypeDto();
-        accountType.setId(accountTypeIdThree);
+    void updateAccountName_GivenAccountExists_ThenUpdateFieldsName() {
 
         AccountDto account = new AccountDto();
         account.setId(accountIdOne);
-        account.setAccountType(accountType);
 
         webTestClient
                 .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
                 .patch()
-                .uri(URI + "/{id}", accountIdOne)
+                .uri(URI + "/{id}/name", accountIdOne)
                 .body(BodyInserters.fromValue(account))
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .consumeWith(System.out::println)
-                .jsonPath("$.type.id").isEqualTo(accountTypeIdThree.toString());
+                .consumeWith(System.out::println);
 
     }
 
     @Test
-    void updateAccount_GivenAccountIdMissing_ThenReturnBadRequest() {
-
-        AccountTypeDto accountType = new AccountTypeDto();
-        accountType.setId(accountTypeIdThree);
+    void updateAccountName_GivenAccountNameIdMissing_ThenReturnBadRequest() {
 
         AccountDto account = new AccountDto();
-        account.setAccountType(accountType);
 
         webTestClient
                 .mutateWith(mockJwt().jwt(SecurityTestUtil.getTestJwt()))
                 .patch()
-                .uri(URI + "/{id}", accountIdOne)
+                .uri(URI + "/{id}/name", accountIdOne)
                 .body(BodyInserters.fromValue(account))
                 .exchange()
                 .expectStatus().isBadRequest();

@@ -1,7 +1,6 @@
 package com.factotum.accountservice.mapper;
 
 import com.factotum.accountservice.dto.AccountDto;
-import com.factotum.accountservice.dto.AccountTypeDto;
 import io.r2dbc.spi.Row;
 
 import java.math.BigDecimal;
@@ -14,15 +13,11 @@ public class AccountMapper implements BiFunction<Row, Object, AccountDto> {
 
         System.out.println(row);
 
-        AccountTypeDto accountType = new AccountTypeDto();
-        accountType.setId(row.get("account_type_id", UUID.class));
-        accountType.setFullName(row.get("full_account_type", String.class));
-        accountType.setShortName(row.get("short_account_type", String.class));
-
         AccountDto account = new AccountDto();
         account.setId(row.get("account_id", UUID.class));
+        account.setFriendlyName(row.get("friendly_name", String.class));
         account.setName(row.get("name", String.class));
-        account.setAccountType(accountType);
+        account.setMask(row.get("mask", String.class));
         account.setAvailableBalance(row.get("available_balance", BigDecimal.class));
         account.setStartingBalance(row.get("starting_balance", BigDecimal.class));
         account.setCurrentBalance(row.get("current_balance", BigDecimal.class));

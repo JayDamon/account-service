@@ -3,7 +3,9 @@ package com.factotum.accountservice.reciever;
 import com.factotum.accountservice.message.UpdateAccountItemMessage;
 import com.factotum.accountservice.message.UpdateAccountMessage;
 import com.factotum.accountservice.model.Account;
+import com.factotum.accountservice.model.Item;
 import com.factotum.accountservice.repository.AccountRepository;
+import com.factotum.accountservice.repository.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -16,9 +18,11 @@ import reactor.core.publisher.Mono;
 public class UpdateAccountQueueLReceiver {
 
     private final AccountRepository accountRepository;
+    private final ItemRepository itemRepository;
 
-    public UpdateAccountQueueLReceiver(AccountRepository accountRepository) {
+    public UpdateAccountQueueLReceiver(AccountRepository accountRepository, ItemRepository itemRepository) {
         this.accountRepository = accountRepository;
+        this.itemRepository = itemRepository;
     }
 
     @RabbitListener(queues = "#{updateAccountQueue.name}")
@@ -26,7 +30,14 @@ public class UpdateAccountQueueLReceiver {
 
         log.atDebug().log("Received update account item message: {}", accountItemMessage);
 
-        Flux.fromIterable(accountItemMessage.getAccounts())
+        Flux<UpdateAccountMessage> accountMessages = Flux.fromIterable(accountItemMessage.getAccounts());
+
+        Mono.just(accountItemMessage)
+                .map(ai ->
+                        this.itemRepository.queryByIdAndTenantId(ai.getItemId(), ai.getTenantId())
+                                .switchIfEmpty(createNewItem(ai))
+                )
+                .transform(ai -> Flux.fromIterable(accountItemMessage.getAccounts()))
                 .map(updateAccount ->
                         this.accountRepository.queryByPlaidIdAndTenantId(updateAccount.getPlaidId(), updateAccount.getTenantId())
                                 .switchIfEmpty(createNewAccount(updateAccount))
@@ -47,6 +58,12 @@ public class UpdateAccountQueueLReceiver {
         account.setStartingBalance(account.getCurrentBalance());
 
         return Mono.just(account);
+    }
+
+    private Mono<Item> createNewItem(UpdateAccountItemMessage updateAccountItemMessage) {
+        Item item = new ModelMapper().map(updateAccountItemMessage, Item.class);
+
+        return this.itemRepository.save(item);
     }
 
 }

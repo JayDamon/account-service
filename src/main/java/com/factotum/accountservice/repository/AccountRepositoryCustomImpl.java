@@ -15,11 +15,10 @@ public class AccountRepositoryCustomImpl implements AccountRepositoryCustom {
     }
 
     private static final String SELECT_QUERY = """
-            SELECT a.account_id, a.name, at.account_type_id as account_type_id, at.full_account_type,
-            at.short_account_type, a.starting_balance, a.current_balance, a.is_primary_account, a.is_in_cash_flow,
+            SELECT a.account_id, a.friendly_name, a.name, a.mask,
+            a.starting_balance, a.current_balance, a.is_primary_account, a.is_in_cash_flow,
             a.available_balance, a.account_limit, a.account_type, a.account_sub_type
             FROM account a
-            LEFT JOIN account_type at ON at.account_type_id = a.account_type_id
             WHERE a.tenant_id = :tenantId""";
 
     @Override

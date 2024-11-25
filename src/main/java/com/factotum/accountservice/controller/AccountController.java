@@ -52,8 +52,8 @@ public class AccountController {
         return this.accountRepository.save(account).map(a -> new ModelMapper().map(a, AccountDto.class));
     }
 
-    @PatchMapping("/{id}")
-    Mono<AccountDto> updateAccount(@PathVariable UUID id, @RequestBody AccountDto account) {
+    @PatchMapping("/{id}/name")
+    Mono<AccountDto> updateAccountName(@PathVariable UUID id, @RequestBody AccountDto account) {
 
         if (account.getId() == null) {
             throw new IllegalArgumentException("Valid account id must be provided");
@@ -63,7 +63,7 @@ public class AccountController {
             throw new IllegalArgumentException("Path id and body id must match");
         }
 
-        return accountService.update(account).map(a -> new ModelMapper().map(a, AccountDto.class));
+        return accountService.updateName(account).map(a -> new ModelMapper().map(a, AccountDto.class));
     }
 
 }

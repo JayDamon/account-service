@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.modelmapper.internal.bytebuddy.implementation.bytecode.ShiftRight;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,6 +21,9 @@ public class UpdateAccountMessage implements Serializable {
 
     @JsonProperty("name")
     private String name;
+
+    @JsonProperty("mask")
+    private String mask;
 
     @JsonProperty("id")
     private String plaidId;
@@ -38,6 +42,12 @@ public class UpdateAccountMessage implements Serializable {
 
     @JsonProperty("limit")
     private BigDecimal limit;
+
+    @JsonProperty("officialCurrencyCode")
+    private String officialCurrencyCode;
+
+    @JsonProperty("unofficialCurrencyCode")
+    private String unofficialCurrencyCode;
 
     @JsonProperty("accountType")
     private String accountTypeName;

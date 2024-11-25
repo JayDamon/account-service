@@ -23,6 +23,16 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Mono<Account> updateName(AccountDto accountDto) {
+        return this.accountRepository.findById(accountDto.getId())
+                .map(a -> {
+                    a.setName(accountDto.getName());
+                    return a;
+                })
+                .flatMap(this.accountRepository::save);
+    }
+
+    @Override
     public Mono<Account> update(AccountDto updatedAccount) {
         return this.accountRepository.findById(updatedAccount.getId())
                 .map(account -> {

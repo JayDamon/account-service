@@ -6,6 +6,8 @@ import reactor.core.publisher.Mono;
 
 public interface AccountService {
 
+    Mono<Account> updateName(AccountDto accountDto);
+
     Mono<Account> update(AccountDto account);
 
 }

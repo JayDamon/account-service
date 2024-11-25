@@ -24,13 +24,15 @@ public class AccountDto implements Serializable {
     @JsonProperty("id")
     private UUID id;
 
+    @JsonProperty("friendlyName")
+    private String friendlyName;
+
     @NotNull
     @JsonProperty("name")
     private String name;
 
-    @NotNull
-    @JsonProperty("type")
-    private AccountTypeDto accountType;
+    @JsonProperty("mask")
+    private String mask;
 
     @JsonProperty("availableBalance")
     private BigDecimal availableBalance;
@@ -44,6 +46,18 @@ public class AccountDto implements Serializable {
 
     @JsonProperty("limit")
     private BigDecimal limit;
+
+    @JsonProperty("officialCurrencyCode")
+    private String officialCurrencyCode;
+
+    @JsonProperty("unofficialCurrencyCode")
+    private String unofficialCurrencyCode;
+
+    @JsonProperty("institutionId")
+    private String institutionId;
+
+    @JsonProperty("institutionName")
+    private String institutionName;
 
     @JsonProperty("isPrimary")
     private Boolean isPrimaryAccount;
