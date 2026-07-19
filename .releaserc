@@ -1,5 +1,5 @@
 {
-  "branches": ["main", "restore-k8s"],
+  "branches": ["main"],
   "repositoryUrl":"https://github.com/JayDamon/account-service.git",
   "debug": "true",
   "plugins": [
